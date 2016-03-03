@@ -1,0 +1,23 @@
+<div id="awb-modal-form">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Creeare AWB - Success</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>AWB-ul a fost creat cu succes.</p>
+                <p id="awb-modal-awb-nr">Nr. AWB: {{ awbNumber }} </p>
+
+                <a href="{{ path('konekt_courier_fancourier_awb_show_pdf', {'awbNumber': awbNumber}) }}" target="_blank">Afisare PDF</a>
+                <a href="{{ path('konekt_courier_fancourier_awb_show_html', {'awbNumber': awbNumber}) }}" target="_blank">Afisare HTML</a>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Închide</button>
+            </div>
+        </div>
+    </div>
+</div>
+

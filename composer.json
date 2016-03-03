@@ -1,0 +1,31 @@
+{
+    "name": "konekt/courier-bundle",
+    "type": "symfony-bundle",
+    "description": "Bundle dealing with integration with package delivery services",
+    "license": "MIT",
+    "keywords": ["package", "parcel", "delivery", "awb"],
+    "authors": [
+        {
+            "name": "Lajos Fazakas",
+            "homepage": "https://artkonekt.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/artkonekt/courier.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "konekt/courier": "dev-master"
+    },
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Konekt\\CourierBundle\\": ""
+        }
+    }
+}
