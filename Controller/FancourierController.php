@@ -14,12 +14,15 @@ namespace Konekt\CourierBundle\Controller;
 
 use Konekt\Courier\FanCourier\Package;
 use Konekt\Courier\FanCourier\PackagePopulatorInterface;
-use Konekt\CourierBundle\Event\AwbCreatedEvent;
-use Konekt\CourierBundle\Event\CourierEvents;
-use Konekt\CourierBundle\FormType\FancourierPackageType;
+use Konekt\Courier\FanCourier\Transaction\AwbHtml\AwbHtmlRequest;
+use Konekt\Courier\FanCourier\Transaction\AwbPdf\AwbPdfRequest;
+use Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbRequest;
 use Konekt\Courier\FanCourier\AwbHtml;
 use Konekt\Courier\FanCourier\AwbPdf;
 use Konekt\Courier\FanCourier\SingleAwbCreator;
+use Konekt\CourierBundle\Event\AwbCreatedEvent;
+use Konekt\CourierBundle\Event\CourierEvents;
+use Konekt\CourierBundle\FormType\FancourierPackageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,14 +43,14 @@ class FancourierController extends Controller
 
         $result = null;
 
-        //refactor this monstruosity
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $awbCreator = new SingleAwbCreator($this->get('konekt_courier.fancourier.api.credentials'));
-            $result = $awbCreator->create($package);
+            $processor = $this->get('konekt_courier.fancourier.request.processor');
+            $createAwbRequest = new CreateAwbRequest($package);
+            $response = $processor->process($createAwbRequest);
 
-            if ($result->isSuccess()) {
-                $awbNumber = $result->getAwbNumber();
+            if ($response->isSuccess()) {
+                $awbNumber = $response->getAwbNumber();
 
                 $event = new AwbCreatedEvent($packageId, $awbNumber);
                 $eventDispatcher = $this->container->get('event_dispatcher');
@@ -59,7 +62,7 @@ class FancourierController extends Controller
 
         return $this->render('KonektCourierBundle:Fancourier:form.html.twig', array(
             'form' => $form->createView(),
-            'result' => $result
+            'result' => $response
         ));
     }
 
@@ -71,9 +74,11 @@ class FancourierController extends Controller
     public function awbShowPdfAction($awbNumber)
     {
         try {
-            $awbPdf = new AwbPdf($this->get('konekt_courier.fancourier.api.credentials'));
 
-            $pdf = $awbPdf->getPdf($awbNumber);
+            $processor = $this->get('konekt_courier.fancourier.request.processor');
+            $awbRequest = new AwbPdfRequest($awbNumber);
+            $response = $processor->process($awbRequest);
+            $pdf = $response->getResponse();
 
             //Do not print alongside HTML result (will fail to load PDF)
             $response = new Response($pdf);
@@ -89,8 +94,11 @@ class FancourierController extends Controller
     public function awbShowHtmlAction($awbNumber)
     {
         try {
-            $awbHtml= new AwbHtml($this->get('konekt_courier.fancourier.api.credentials'));
-            $html = $awbHtml->getHtml($awbNumber);
+            $processor = $this->get('konekt_courier.fancourier.request.processor');
+            $awbRequest = new AwbHtmlRequest($awbNumber);
+            $response = $processor->process($awbRequest);
+
+            $html = $response->getResponse();
 
             $response = new Response($html);
 

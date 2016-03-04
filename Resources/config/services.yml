@@ -5,3 +5,13 @@ services:
             - %konekt_courier.fancourier.api.username%
             - %konekt_courier.fancourier.api.user_pass%
             - %konekt_courier.fancourier.api.client_id%
+
+    konekt_courier.fancourier.command.factory:
+        class: Konekt\Courier\FanCourier\Transaction\CommandFactory
+        arguments:
+            - "@konekt_courier.fancourier.api.credentials"
+
+    konekt_courier.fancourier.request.processor:
+        class: Konekt\Courier\Common\RequestProcessor
+        arguments:
+            - "@konekt_courier.fancourier.command.factory"
