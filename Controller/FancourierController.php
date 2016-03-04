@@ -20,7 +20,9 @@ use Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbRequest;
 use Konekt\Courier\FanCourier\AwbHtml;
 use Konekt\Courier\FanCourier\AwbPdf;
 use Konekt\Courier\FanCourier\SingleAwbCreator;
+use Konekt\Courier\FanCourier\Transaction\DeleteAwb\DeleteAwbRequest;
 use Konekt\CourierBundle\Event\AwbCreatedEvent;
+use Konekt\CourierBundle\Event\AwbDeletedEvent;
 use Konekt\CourierBundle\Event\CourierEvents;
 use Konekt\CourierBundle\FormType\FancourierPackageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -137,6 +139,37 @@ class FancourierController extends Controller
             $response = new Response($html);
 
             return $response;
+        } catch (Exception $exc) {
+            //TOREVIEW
+            throw $exc;
+        }
+    }
+
+    /**
+     * Deletes an AWB.
+     *
+     * @param $awbNumber
+     *
+     * @return Response
+     * @throws Exception
+     */
+    public function awbDeleteAction($awbNumber)
+    {
+        try {
+            $processor = $this->get('konekt_courier.fancourier.request.processor');
+            $awbRequest = new DeleteAwbRequest($awbNumber);
+            $response = $processor->process($awbRequest);
+
+            $error = false;
+            if ($response->isSuccess()) {
+                $event = new AwbDeletedEvent($awbNumber);
+                $eventDispatcher = $this->container->get('event_dispatcher');
+                $eventDispatcher->dispatch(CourierEvents::AWB_DELETED, $event);
+            } else {
+                $error = $response->getErrorMessage();
+            }
+
+            return $this->render('KonektCourierBundle:Fancourier:delete_result.html.twig', compact('awbNumber', 'error'));
         } catch (Exception $exc) {
             //TOREVIEW
             throw $exc;

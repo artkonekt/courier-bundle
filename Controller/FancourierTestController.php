@@ -15,6 +15,8 @@ namespace Konekt\CourierBundle\Controller;
 use Konekt\Courier\FanCourier\Package;
 use Konekt\Courier\FanCourier\SingleAwbCreator;
 use Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbRequest;
+use Konekt\Courier\FanCourier\Transaction\DeleteAwb\DeleteAwbCommand;
+use Konekt\Courier\FanCourier\Transaction\DeleteAwb\DeleteAwbRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -51,6 +53,25 @@ class FancourierTestController extends Controller
         $response = $processor->process($createAwbRequest);
 
         var_dump($response);
+
+        return new Response();
+    }
+
+    /**
+     * Deletes the specified AWB from the Fancourier system.
+     *
+     * @param $awbNumber
+     *
+     * @return Response
+     */
+    public function testDeletionAction($awbNumber)
+    {
+        $processor = $this->get('konekt_courier.fancourier.request.processor');
+        $deleteAwbRequest = new DeleteAwbRequest($awbNumber);
+        $response = $processor->process($deleteAwbRequest);
+        var_dump($response);
+        var_dump($response->isSuccess());
+
         return new Response();
     }
 }

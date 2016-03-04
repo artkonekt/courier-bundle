@@ -18,12 +18,20 @@ namespace Konekt\CourierBundle\Event;
 final class CourierEvents
 {
     /**
-     * The courier.awb.created event is thrown each time an awb is created
-     * in the system.
+     * The courier.awb.created event is thrown each time an awb is created.
      *
      * The event listener receives a Konekt\CourierBundle\Event\AwbCreatedEvent instance.
      *
      * @var string
      */
     const AWB_CREATED = 'courier.awb.created';
+
+    /**
+     * The courier.awb.delete event is thrown each time an awb is deleted.
+     *
+     * The event listener receives a Konekt\CourierBundle\Event\AwbDeletedEvent instance.
+     *
+     * @var string
+     */
+    const AWB_DELETED = 'courier.awb.deleted';
 }
