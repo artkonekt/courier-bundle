@@ -14,11 +14,11 @@ namespace Konekt\CourierBundle\Controller;
 
 use Konekt\Courier\FanCourier\Package;
 use Konekt\Courier\FanCourier\PackagePopulatorInterface;
-use Konekt\Courier\FanCourier\Transaction\AwbHtml\AwbHtmlRequest;
-use Konekt\Courier\FanCourier\Transaction\AwbPdf\AwbPdfRequest;
+use Konekt\Courier\FanCourier\Transaction\AwbToHtml\AwbToHtmlRequest;
+use Konekt\Courier\FanCourier\Transaction\AwbToPdf\AwbToPdfRequest;
 use Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbRequest;
-use Konekt\Courier\FanCourier\AwbHtml;
-use Konekt\Courier\FanCourier\AwbPdf;
+use Konekt\Courier\FanCourier\AwbToHtml;
+use Konekt\Courier\FanCourier\AwbToPdf;
 use Konekt\Courier\FanCourier\SingleAwbCreator;
 use Konekt\Courier\FanCourier\Transaction\DeleteAwb\DeleteAwbRequest;
 use Konekt\CourierBundle\Event\AwbCreatedEvent;
@@ -104,7 +104,7 @@ class FancourierController extends Controller
         try {
 
             $processor = $this->get('konekt_courier.fancourier.request.processor');
-            $awbRequest = new AwbPdfRequest($awbNumber);
+            $awbRequest = new AwbToPdfRequest($awbNumber);
             $response = $processor->process($awbRequest);
             $pdf = $response->getPdf();
 
@@ -131,7 +131,7 @@ class FancourierController extends Controller
     {
         try {
             $processor = $this->get('konekt_courier.fancourier.request.processor');
-            $awbRequest = new AwbHtmlRequest($awbNumber);
+            $awbRequest = new AwbToHtmlRequest($awbNumber);
             $response = $processor->process($awbRequest);
 
             $html = $response->getHtml();
