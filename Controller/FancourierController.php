@@ -1,4 +1,14 @@
 <?php
+/**
+ * Contains class FancourierController
+ *
+ * @package     Konekt\CourierBundle
+ * @copyright   Copyright (c) 2016 Storm Storez Srl-D
+ * @author      Lajos Fazakas
+ * @license     MIT
+ * @since       2016-02-25
+ * @version     2016-02-25
+ */
 
 namespace Konekt\CourierBundle\Controller;
 
@@ -14,16 +24,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Contains class AwbController
- *
- * @package     CourierBundle
- * @copyright   Copyright (c) 2016 Storm Storez Srl-D
- * @author      Lajos Fazakas <lajos@artkonekt.com>
- * @license     Proprietary
- * @since       2016-02-25
- * @version     2016-02-25
- */
 class FancourierController extends Controller
 {
     public function createAwbAction(Request $request, $packageId)

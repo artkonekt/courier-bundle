@@ -1,17 +1,16 @@
 <?php
 /**
- * Contains class AwbType
+ * Contains class FancourierPackageType
  *
- * @package     CourierBundle
+ * @package     Konekt\CourierBundle
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
- * @author      Lajos Fazakas <lajos@artkonekt.com>
- * @license     Proprietary
+ * @author      Lajos Fazakas
+ * @license     MIT
  * @since       2016-02-24
  * @version     2016-02-24
  */
 
 namespace Konekt\CourierBundle\FormType;
-
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

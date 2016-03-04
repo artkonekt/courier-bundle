@@ -2,16 +2,15 @@
 /**
  * Contains class Configuration
  *
- * @package     Konekt\CourierBundle\DependencyInjection
+ * @package     Konekt\CourierBundle
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
- * @author      Lajos Fazakas <lajos@artkonekt.com>
- * @license     Proprietary
+ * @author      Lajos Fazakas
+ * @license     MIT
  * @since       2016-03-03
  * @version     2016-03-03
  */
 
 namespace Konekt\CourierBundle\DependencyInjection;
-
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

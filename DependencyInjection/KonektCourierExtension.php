@@ -1,11 +1,11 @@
 <?php
 /**
- * Contains class CourierExtension
+ * Contains class KonektCourierExtension
  *
- * @package     Konekt\CourierBundle\DependencyInjection
+ * @package     Konekt\CourierBundle
  * @copyright   Copyright (c) 2016 Storm Storez Srl-D
- * @author      Lajos Fazakas <lajos@artkonekt.com>
- * @license     Proprietary
+ * @author      Lajos Fazakas
+ * @license     MIT
  * @since       2016-03-01
  * @version     2016-03-01
  */
