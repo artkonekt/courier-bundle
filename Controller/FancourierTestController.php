@@ -14,6 +14,7 @@ namespace Konekt\CourierBundle\Controller;
 
 use Konekt\Courier\FanCourier\Package;
 use Konekt\Courier\FanCourier\SingleAwbCreator;
+use Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,26 +22,27 @@ class FancourierTestController extends Controller
 {
     public function testCreationAction()
     {
-        $awb = new Package();
-        $awb->tip = 'standard';
+        $package = new Package();
+        $package->tip = 'standard';
 
-        $awb->localitate = 'Târgu Mureș';
-        $awb->judet = 'Mureș';
-        $awb->strada = 'Aleea Carpati 12';
-        $awb->telefon = '0758099432';
-        $awb->nume_destinatar = 'Name 1';
+        $package->localitate = 'Târgu Mureș';
+        $package->judet = 'Mureș';
+        $package->strada = 'Aleea Carpati 12';
+        $package->telefon = '0758099432';
+        $package->nume_destinatar = 'Name 1';
 
-        $awb->plata_expeditii = 'expeditor';
+        $package->plata_expeditii = 'expeditor';
 
-        $awb->greutate = 12;
-        $awb->nr_colet = 1;
+        $package->greutate = 12;
+        $package->nr_colet = 1;
 
-        $awb->observatii = 'Livrare ceva';
+        $package->observatii = 'Livrare ceva';
 
-        $awbCreator = new SingleAwbCreator($this->get('courier.fancourier.api.credentials'));
-        $result = $awbCreator->create($awb);
+        $processor = $this->get('konekt_courier.fancourier.request.processor');
+        $createAwbRequest = new CreateAwbRequest($package);
+        $response = $processor->process($createAwbRequest);
 
-        var_dump($result);
+        var_dump($response);
         return new Response();
     }
 }

@@ -41,7 +41,7 @@ class FancourierController extends Controller
 
         $form->handleRequest($request);
 
-        $result = null;
+        $response = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
 
