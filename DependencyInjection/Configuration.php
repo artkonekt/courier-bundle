@@ -15,6 +15,9 @@ namespace Konekt\CourierBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+/**
+ * Bundle's configuration definition.
+ */
 class Configuration implements ConfigurationInterface
 {
     /**

@@ -27,8 +27,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Controller with actions related to the Fancourier package carrier.
+ */
 class FancourierController extends Controller
 {
+    /**
+     * Shows the AWB creation form and also processes the submitted form: creates an AWB in the FanCourier system.
+     *
+     * @param Request                                   $request
+     * @param                                           $packageId The third party identifier of the package
+     *
+     * @return Response
+     */
     public function createAwbAction(Request $request, $packageId)
     {
         $package = new Package();
@@ -66,11 +77,26 @@ class FancourierController extends Controller
         ));
     }
 
+    /**
+     * Shows the details of an AWB.
+     *
+     * @param $awbNumber
+     *
+     * @return Response
+     */
     public function awbShowDetailsAction($awbNumber)
     {
         return $this->render('KonektCourierBundle:Fancourier:details.html.twig', compact('awbNumber'));
     }
 
+    /**
+     * Shows the AWB label in PDF format.
+     *
+     * @param $awbNumber
+     *
+     * @return Response
+     * @throws Exception
+     */
     public function awbShowPdfAction($awbNumber)
     {
         try {
@@ -78,7 +104,7 @@ class FancourierController extends Controller
             $processor = $this->get('konekt_courier.fancourier.request.processor');
             $awbRequest = new AwbPdfRequest($awbNumber);
             $response = $processor->process($awbRequest);
-            $pdf = $response->getResponse();
+            $pdf = $response->getPdf();
 
             //Do not print alongside HTML result (will fail to load PDF)
             $response = new Response($pdf);
@@ -91,6 +117,14 @@ class FancourierController extends Controller
         }
     }
 
+    /**
+     * Shows the AWB label in HTML format.
+     *
+     * @param $awbNumber
+     *
+     * @return Response
+     * @throws Exception
+     */
     public function awbShowHtmlAction($awbNumber)
     {
         try {
@@ -98,7 +132,7 @@ class FancourierController extends Controller
             $awbRequest = new AwbHtmlRequest($awbNumber);
             $response = $processor->process($awbRequest);
 
-            $html = $response->getResponse();
+            $html = $response->getHtml();
 
             $response = new Response($html);
 
@@ -110,6 +144,9 @@ class FancourierController extends Controller
     }
 
     /**
+     * Returns the package populator service provided by the client application. If no such service was provided, returns
+     * null.
+     *
      * @return PackagePopulatorInterface
      */
     private function getPackagePopulator()

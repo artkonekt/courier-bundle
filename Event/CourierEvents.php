@@ -12,15 +12,16 @@
 
 namespace Konekt\CourierBundle\Event;
 
-
+/**
+ * Class specifying all events of the bundle.
+ */
 final class CourierEvents
 {
     /**
      * The courier.awb.created event is thrown each time an awb is created
      * in the system.
      *
-     * The event listener receives a
-     * Konekt\CourierBundle\Event\AwbCreatedEvent instance.
+     * The event listener receives a Konekt\CourierBundle\Event\AwbCreatedEvent instance.
      *
      * @var string
      */

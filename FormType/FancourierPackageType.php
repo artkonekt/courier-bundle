@@ -16,6 +16,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * Form for a package object. This object is used for creating the AWB.
+ */
 class FancourierPackageType extends AbstractType
 {
     /**

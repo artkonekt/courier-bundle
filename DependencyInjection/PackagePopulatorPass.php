@@ -17,6 +17,9 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+/**
+ * Bundle's compiler pass doing validation of the package populator service at compile time.
+ */
 class PackagePopulatorPass implements CompilerPassInterface
 {
     /**

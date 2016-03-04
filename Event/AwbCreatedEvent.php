@@ -14,10 +14,19 @@ namespace Konekt\CourierBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Event class which has to be dispatched at AWB creation.
+ */
 class AwbCreatedEvent extends Event
 {
+    /**
+     * @var string
+     */
     private $packageId;
 
+    /**
+     * @var string
+     */
     private $awbNumber;
 
     /**
@@ -33,6 +42,8 @@ class AwbCreatedEvent extends Event
     }
 
     /**
+     * Returns the package ID.
+     *
      * @return mixed
      */
     public function getPackageId()
@@ -41,6 +52,8 @@ class AwbCreatedEvent extends Event
     }
 
     /**
+     * Returns the number of the AWB.
+     *
      * @return mixed
      */
     public function getAwbNumber()

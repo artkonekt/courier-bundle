@@ -18,8 +18,16 @@ use Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Controller for testing AWB creation
+ */
 class FancourierTestController extends Controller
 {
+    /**
+     * Creates a test AWB in the FanCourier system.
+     *
+     * @return Response
+     */
     public function testCreationAction()
     {
         $package = new Package();

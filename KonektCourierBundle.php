@@ -16,8 +16,16 @@ use Konekt\CourierBundle\DependencyInjection\PackagePopulatorPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * Class KonektCourierBundle
+ */
 class KonektCourierBundle extends Bundle
 {
+    /**
+     * @inheritdoc
+     *
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
