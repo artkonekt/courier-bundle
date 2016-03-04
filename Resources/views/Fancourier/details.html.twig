@@ -9,9 +9,11 @@
             <div class="modal-body">
                 <p id="awb-modal-awb-nr">Nr. AWB: {{ awbNumber }} </p>
 
-                <a href="{{ path('konekt_courier_fancourier_awb_show_pdf', {'awbNumber': awbNumber}) }}" target="_blank">Afișare AWB în PDF</a>
-                <a href="{{ path('konekt_courier_fancourier_awb_show_html', {'awbNumber': awbNumber}) }}" target="_blank">Afișare în HTML</a>
-                <a href="{{ path('konekt_courier_fancourier_awb_delete', {'awbNumber': awbNumber}) }}" id="konekt-courier-awb-delete">Ștergere AWB</a>
+                <ul>
+                    <li><a href="{{ path('konekt_courier_fancourier_awb_show_pdf', {'awbNumber': awbNumber}) }}" target="_blank">Afișare AWB în PDF</a></li>
+                    <li><a href="{{ path('konekt_courier_fancourier_awb_show_html', {'awbNumber': awbNumber}) }}" target="_blank">Afișare în HTML</a></li>
+                    <li><a href="{{ path('konekt_courier_fancourier_awb_delete', {'awbNumber': awbNumber}) }}" id="konekt-courier-awb-delete">Ștergere AWB</a></li>
+                </ul>
             </div>
 
             <div class="modal-footer">
