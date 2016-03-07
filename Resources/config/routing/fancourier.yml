@@ -1,35 +1,35 @@
 konekt_courier_fancourier_create_awb:
-    path: /courier/awb/create/{packageId}
+    path: /awb/create/{packageId}
     methods: [GET, POST]
     defaults:
         _controller: KonektCourierBundle:Fancourier:createAwb
 
 konekt_courier_fancourier_awb_show_details:
-    path: /courier/awb/details/{awbNumber}
+    path: /awb/details/{awbNumber}
     defaults:
         _controller: KonektCourierBundle:Fancourier:awbShowDetails
 
 konekt_courier_fancourier_awb_show_pdf:
-    path: /courier/awb/showPdf/{awbNumber}
+    path: /awb/showPdf/{awbNumber}
     defaults:
         _controller: KonektCourierBundle:Fancourier:awbShowPdf
 
 konekt_courier_fancourier_awb_show_html:
-    path: /courier/awb/showHtml/{awbNumber}
+    path: /awb/showHtml/{awbNumber}
     defaults:
         _controller: KonektCourierBundle:Fancourier:awbShowHtml
 
 konekt_courier_fancourier_awb_delete:
-    path: /courier/awb/delete/{awbNumber}
+    path: /awb/delete/{awbNumber}
     defaults:
         _controller: KonektCourierBundle:Fancourier:awbDelete
 
 konekt_courier_fancourier_test_awb_creation:
-    path: /courier/testAwbCreation
+    path: /testAwbCreation
     defaults:
         _controller: KonektCourierBundle:FancourierTest:testCreation
 
 konekt_courier_fancourier_test_awb_deletion:
-    path: /courier/testAwbDeletion/{awbNumber}
+    path: /testAwbDeletion/{awbNumber}
     defaults:
         _controller: KonektCourierBundle:FancourierTest:testDeletion

@@ -1,0 +1,4 @@
+konekt_courier_sprinter_test_register_parcel:
+    path: /testRegisterParcel
+    defaults:
+        _controller: KonektCourierBundle:SprinterTest:testRegisterParcel
