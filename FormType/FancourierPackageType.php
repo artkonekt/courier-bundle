@@ -12,7 +12,9 @@
 
 namespace Konekt\CourierBundle\FormType;
 
+use Konekt\Courier\FanCourier\Utils\StringNormalizer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -137,6 +139,19 @@ class FancourierPackageType extends AbstractType
                 'Bucuresti' => 'București',
             ]
         ]);
+
+        $builder->get('judet')
+            ->addModelTransformer(new CallbackTransformer(
+                //we should normalize the recieved string, it can contain romanian accents
+                function ($originalValue) {
+                    $stringNormalizer = new StringNormalizer();
+                    return $stringNormalizer->unaccent($originalValue);
+                },
+                function ($submittedValue) {
+                    return $submittedValue;
+                }
+            ))
+        ;
 
         $builder->add('localitate', 'text', [
             'required' => true
