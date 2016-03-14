@@ -32,21 +32,25 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode('fancourier')
+                ->arrayNode('couriers')
                     ->children()
-                        ->arrayNode('api')
+                        ->arrayNode('fancourier')
                             ->children()
-                                ->scalarNode('username')->isRequired()->cannotBeEmpty()->end()
-                                ->scalarNode('user_pass')->isRequired()->cannotBeEmpty()->end()
-                                ->scalarNode('client_id')->isRequired()->cannotBeEmpty()->end()
+                                ->arrayNode('api')
+                                    ->children()
+                                        ->scalarNode('username')->isRequired()->cannotBeEmpty()->end()
+                                        ->scalarNode('user_pass')->isRequired()->cannotBeEmpty()->end()
+                                        ->scalarNode('client_id')->isRequired()->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end() //api
+                                ->scalarNode('package_populator_service')
+                                    ->info("The name of the service which populates the package object (and form) based on the package ID.\nIt should implement \\Konekt\\Courier\\FanCourier\\Package\\PackagePopulatorInterface")
+                                    //->defaultValue('konekt_courier.fancourier.package.populator.default')
+                                ->end()
                             ->end()
-                        ->end() //api
-                        ->scalarNode('package_populator_service')
-                            ->info("The name of the service which populates the package object (and form) based on the package ID.\nIt should implement \\Konekt\\Courier\\FanCourier\\Package\\PackagePopulatorInterface")
-                            //->defaultValue('konekt_courier.fancourier.package.populator.default')
-                        ->end()
+                        ->end() //fancourier
                     ->end()
-                ->end() //fancourier
+                ->end() //couriers
             ->end()
         ;
 

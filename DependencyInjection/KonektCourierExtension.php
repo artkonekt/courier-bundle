@@ -37,6 +37,8 @@ class KonektCourierExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $config);
 
+        $config = $config['couriers'];
+
         $container->setParameter('konekt_courier.fancourier.api.username', $config['fancourier']['api']['username']);
         $container->setParameter('konekt_courier.fancourier.api.user_pass', $config['fancourier']['api']['user_pass']);
         $container->setParameter('konekt_courier.fancourier.api.client_id', $config['fancourier']['api']['client_id']);
