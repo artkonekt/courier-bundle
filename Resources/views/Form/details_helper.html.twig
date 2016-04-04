@@ -1,0 +1,3 @@
+{% if form.carrierDetails is defined and form.carrierDetails.map is defined %}
+    {% form_theme form.carrierDetails.map 'KonektCourierBundle:Form:fields.html.twig' %}
+{% endif %}
