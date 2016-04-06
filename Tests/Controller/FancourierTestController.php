@@ -10,7 +10,7 @@
  * @version     2016-03-02
  */
 
-namespace Konekt\CourierBundle\Controller;
+namespace Konekt\CourierBundle\Tests\Controller;
 
 use Konekt\Courier\FanCourier\Model\Package;
 use Konekt\Courier\FanCourier\SingleAwbCreator;

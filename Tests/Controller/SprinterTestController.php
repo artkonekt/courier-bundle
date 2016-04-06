@@ -10,7 +10,7 @@
  * @version     2016-03-07
  */
 
-namespace Konekt\CourierBundle\Controller;
+namespace Konekt\CourierBundle\Tests\Controller;
 
 
 use Konekt\Courier\Sprinter\PartnerToPudo\Transaction\RegisterParcel\RegisterParcelRequest;

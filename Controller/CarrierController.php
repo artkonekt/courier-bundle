@@ -13,7 +13,6 @@
 namespace Konekt\CourierBundle\Controller;
 
 use Exception;
-use Konekt\Courier\FanCourier\FancourierGateway;
 use Konekt\Courier\Sprinter\SprinterGateway;
 use Konekt\CourierBundle\Event\AwbCreatedEvent;
 use Konekt\CourierBundle\Event\AwbDeletedEvent;
@@ -55,7 +54,7 @@ class CarrierController extends Controller
                 $eventDispatcher = $this->container->get('event_dispatcher');
                 $eventDispatcher->dispatch(CourierEvents::AWB_CREATED, $event);
 
-                $carrierGateway = new FancourierGateway();
+                $carrierGateway = new SprinterGateway();
                 return $this->render('KonektCourierBundle:Awb:created.html.twig', compact('awbNumber', 'carrierGateway'));
             }
         }
@@ -75,7 +74,7 @@ class CarrierController extends Controller
      */
     public function showDetailsAction($awbNumber)
     {
-        $carrierGateway = new FancourierGateway();
+        $carrierGateway = new SprinterGateway();
         return $this->render('KonektCourierBundle:Awb:details.html.twig', compact('awbNumber', 'carrierGateway'));
     }
 
@@ -93,7 +92,7 @@ class CarrierController extends Controller
 
         try {
 
-            $response = $engine->deleteAwb('fancourier', $awbNumber);
+            $response = $engine->deleteAwb('sprinter', $awbNumber);
             $error = false;
             if ($response->isSuccess()) {
                 $event = new AwbDeletedEvent($awbNumber);
@@ -115,7 +114,7 @@ class CarrierController extends Controller
         $engine = $this->get('konekt_courier.engine');
 
         try {
-            $response = $engine->showPdfLabel('fancourier', $awbNumber);
+            $response = $engine->showPdfLabel('sprinter', $awbNumber);
             $pdf = $response->getPdf();
 
             //Do not print alongside HTML result (will fail to load PDF)
@@ -134,7 +133,7 @@ class CarrierController extends Controller
         $engine = $this->get('konekt_courier.engine');
 
         try {
-            $response = $engine->showHtmlLabel('fancourier', $awbNumber);
+            $response = $engine->showHtmlLabel('sprinter', $awbNumber);
             $html = $response->getHtml();
 
             $response = new Response($html);

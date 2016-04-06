@@ -10,7 +10,7 @@
  * @version     2016-02-25
  */
 
-namespace Konekt\CourierBundle\Controller;
+namespace Konekt\CourierBundle\Tests\Controller;
 
 use Konekt\Courier\FanCourier\Bridge\Symfony\FancourierPackageType;
 use Konekt\Courier\FanCourier\Model\Package;

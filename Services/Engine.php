@@ -60,11 +60,6 @@ class Engine
                 $awbRequest = new DeleteAwbRequest($awbNumber);
                 $response = $processor->process($awbRequest);
                 break;
-            //case 'sprinter':
-            //    $createAwbRequest = new RegisterParcelRequest($model);
-            //    $processor = $this->container->get('konekt_courier.sprinter.request.processor');
-            //    $response = $processor->process($createAwbRequest);
-            //    break;
             default:
                 throw new InvalidCourierException("Courier $carrierName not supported");
         }
@@ -82,11 +77,6 @@ class Engine
                 $awbRequest = new AwbToPdfRequest($awbNumber);
                 $response = $processor->process($awbRequest);
                 break;
-            //case 'sprinter':
-            //    $createAwbRequest = new RegisterParcelRequest($model);
-            //    $processor = $this->container->get('konekt_courier.sprinter.request.processor');
-            //    $response = $processor->process($createAwbRequest);
-            //    break;
             default:
                 throw new InvalidCourierException("Courier $carrierName not supported");
         }
