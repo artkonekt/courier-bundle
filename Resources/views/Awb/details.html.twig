@@ -3,16 +3,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Detalii AWB {{ awbNumber }}</h4>
+                <h4 class="modal-title" id="myModalLabel">{{ awbNumber }} - {{ 'konekt_courier.awb.details.header'|trans }}</h4>
             </div>
 
             <div class="modal-body">
-                <p id="awb-modal-awb-nr">Nr. AWB: {{ awbNumber }} </p>
+                <p id="awb-modal-awb-nr">{{ 'konekt_courier.awb.number.label'|trans }} {{ awbNumber }} </p>
                 {% include 'KonektCourierBundle:Awb:supported_operations.html.twig' %}
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Închide</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'konekt_courier.awb.modal.close'|trans }}</button>
             </div>
         </div>
     </div>

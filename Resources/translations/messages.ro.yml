@@ -1,0 +1,26 @@
+konekt_courier:
+    awb:
+        create:
+            button: Creeare AWB
+            success:
+                header: Creeare AWB - Succes
+                text: AWB-ul a fost creat cu succes.
+        number:
+            label: Nr. AWB:
+        modal:
+            close: Închide
+        delete:
+            header: Ștergere AWB
+            success: AWB-ul a fost șters
+            error: AWB-ul nu a putut fi șters. Mesajul de eroare:
+        details:
+            header: operații
+        operations:
+            show_html_label: Afișare în HTML
+            show_pdf_label: Afișare în PDF
+            delete: Ștergere AWB
+            delete_confirm_text: AWB-ul va fi șters din sistemul curierului. Ești sigur?
+
+    form:
+        shipping_method:
+            carrier: Curier

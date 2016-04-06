@@ -1,0 +1,26 @@
+konekt_courier:
+    awb:
+        create:
+            button: Csomag bejegyzése
+            success:
+                header: Sikeres csomagbejegyzés
+                text: A csomagot sikeresen bejegyeztük a futárszolgálatnál.
+        number:
+            label: AWB száma:
+        modal:
+            close: Bezár
+        delete:
+            header: Csomag törlése a futárszolgálatnál
+            success: Csomag sikeresen törölve.
+            error: Sikertelen törlés. Hibaüzenet:
+        details:
+            header: műveletek
+
+        operations:
+            show_html_label: Címke megjelenítése HTML-ben
+            show_pdf_label: Címke megjelenítése PDF-ben
+            delete: Csomag törlése
+            delete_confirm_text: Figyelem! A csomagot töröljük a futárszolgálat rendszeréből. Mehet?
+    form:
+        shipping_method:
+            carrier: Futárszolgálat

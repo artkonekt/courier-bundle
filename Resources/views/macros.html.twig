@@ -1,6 +1,6 @@
 {% macro awbCreateButton(shipmentId, text) %}
     <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#awbModal" href="{{ path('konekt_courier_create_awb', {'shipmentId': shipmentId}) }}">
-        <i class="glyphicon glyphicon-ok"></i> <span>{{ text|default('artkonekt_sylius_shipping.awb.create'|trans) }}</span>
+        <i class="glyphicon glyphicon-ok"></i> <span>{{ text|default('konekt_courier.awb.create.button'|trans) }}</span>
     </a>
 {% endmacro %}
 

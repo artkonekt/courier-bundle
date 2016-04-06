@@ -3,19 +3,19 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Stergere AWB {{ awbNumber }}</h4>
+                <h4 class="modal-title" id="myModalLabel">{{ 'konekt_courier.awb.delete.header'|trans }} {{ awbNumber }}</h4>
             </div>
 
             <div class="modal-body">
                 {% if error %}
-                    <p class="alert alert-danger">AWB-ul {{ awbNumber }} nu a putut fi sters. Mesajul de eroare: {{ error }}</p>
+                    <p class="alert alert-danger">{{ 'konekt_courier.awb.delete.error'|trans }} {{ error }}</p>
                 {% else %}
-                    <p class="alert alert-success">AWB-ul <span id="awb-modal-awb-nr">{{ awbNumber }}</span> a fost sters</p>
+                    <p class="alert alert-success">{{ 'konekt_courier.awb.delete.success'|trans }} <span id="awb-modal-awb-nr" style="display: none">{{ awbNumber }}</span></p>
                 {% endif %}
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Închide</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'konekt_courier.awb.modal.close'|trans }}</button>
             </div>
         </div>
     </div>

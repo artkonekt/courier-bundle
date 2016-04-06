@@ -1,19 +1,19 @@
 <ul>
     {% if carrierGateway.isSupported('show_label_html') %}
         <li>
-            <a href="{{ path('konekt_courier_show_label_html', {'awbNumber': awbNumber}) }}" target="_blank">Afișare în HTML</a>
+            <a href="{{ path('konekt_courier_show_label_html', {'awbNumber': awbNumber}) }}" target="_blank">{{ 'konekt_courier.awb.operations.show_html_label'|trans }}</a>
         </li>
     {% endif %}
 
     {% if carrierGateway.isSupported('show_label_pdf') %}
         <li>
-            <a href="{{ path('konekt_courier_show_label_pdf', {'awbNumber': awbNumber}) }}" target="_blank">Afișare în PDF</a>
+            <a href="{{ path('konekt_courier_show_label_pdf', {'awbNumber': awbNumber}) }}" target="_blank">{{ 'konekt_courier.awb.operations.show_pdf_label'|trans }}</a>
         </li>
     {% endif %}
 
     {% if carrierGateway.isSupported('delete_awb') %}
         <li>
-            <a href="{{ path('konekt_courier_delete_awb', {'awbNumber': awbNumber}) }}" id="konekt-courier-awb-delete">Ștergere AWB</a>
+            <a href="{{ path('konekt_courier_delete_awb', {'awbNumber': awbNumber}) }}" id="konekt-courier-awb-delete">{{ 'konekt_courier.awb.operations.delete'|trans }}</a>
         </li>
     {% endif %}
 </ul>
@@ -23,7 +23,7 @@
     (function ($) {
         $('body').on('click', '#konekt-courier-awb-delete', function (event) {
 
-            if (!confirm('AWB-ul va fi șters din sistemul FANCourier. Ești sigur?')) {
+            if (!confirm({{ 'konekt_courier.awb.operations.delete_confirm_text'|trans }})) {
                 return false;
             }
 
