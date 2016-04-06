@@ -12,6 +12,7 @@
 
 namespace Konekt\CourierBundle\Services;
 
+use Konekt\Courier\Common\Exception\InvalidCourierException;
 use Symfony\Component\DependencyInjection\Container;
 
 class ModelFactory implements ModelFactoryInterface

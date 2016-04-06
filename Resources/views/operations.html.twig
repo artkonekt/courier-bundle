@@ -1,7 +1,10 @@
-{% import 'KonektCourierBundle::macros.html.twig' as macros %}
+{# TODO: abstract this condition in the model #}
+{% if shipment.carrier in ['fancourier', 'sprinter'] %}
+    {% import 'KonektCourierBundle::macros.html.twig' as macros %}
 
-{{ macros.modalPlaceholder }}
+    {{ macros.modalPlaceholder }}
 
-{% set trackingContent = shipment.tracking ? macros.awbDetailsButton(shipment.tracking) : macros.awbCreateButton(shipment.id) %}
+    {% set trackingContent = shipment.tracking ? macros.awbDetailsButton(shipment.tracking) : macros.awbCreateButton(shipment.id) %}
 
-{{ trackingContent }}
+    {{ trackingContent }}
+{% endif %}
