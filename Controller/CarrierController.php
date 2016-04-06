@@ -13,6 +13,8 @@
 namespace Konekt\CourierBundle\Controller;
 
 use Exception;
+use Konekt\Courier\Common\Exception\InvalidCourierException;
+use Konekt\Courier\FanCourier\FancourierGateway;
 use Konekt\Courier\Sprinter\SprinterGateway;
 use Konekt\CourierBundle\Event\AwbCreatedEvent;
 use Konekt\CourierBundle\Event\AwbDeletedEvent;
@@ -25,6 +27,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CarrierController extends Controller
 {
+    private $hardCodedGateway;
+
+    public function __construct()
+    {
+        //$this->hardCodedGateway = 'fancourier';
+        $this->hardCodedGateway = 'sprinter';
+    }
+
     public function createAwbAction(Request $request, $shipmentId)
     {
         $shipmentRepository = $this->get('sylius.repository.shipment');
@@ -54,7 +64,7 @@ class CarrierController extends Controller
                 $eventDispatcher = $this->container->get('event_dispatcher');
                 $eventDispatcher->dispatch(CourierEvents::AWB_CREATED, $event);
 
-                $carrierGateway = new SprinterGateway();
+                $carrierGateway = $this->getGateway();
                 return $this->render('KonektCourierBundle:Awb:created.html.twig', compact('awbNumber', 'carrierGateway'));
             }
         }
@@ -74,7 +84,7 @@ class CarrierController extends Controller
      */
     public function showDetailsAction($awbNumber)
     {
-        $carrierGateway = new SprinterGateway();
+        $carrierGateway = $this->getGateway();
         return $this->render('KonektCourierBundle:Awb:details.html.twig', compact('awbNumber', 'carrierGateway'));
     }
 
@@ -92,7 +102,7 @@ class CarrierController extends Controller
 
         try {
 
-            $response = $engine->deleteAwb('sprinter', $awbNumber);
+            $response = $engine->deleteAwb($this->hardCodedGateway, $awbNumber);
             $error = false;
             if ($response->isSuccess()) {
                 $event = new AwbDeletedEvent($awbNumber);
@@ -114,7 +124,7 @@ class CarrierController extends Controller
         $engine = $this->get('konekt_courier.engine');
 
         try {
-            $response = $engine->showPdfLabel('sprinter', $awbNumber);
+            $response = $engine->showPdfLabel($this->hardCodedGateway, $awbNumber);
             $pdf = $response->getPdf();
 
             //Do not print alongside HTML result (will fail to load PDF)
@@ -133,7 +143,7 @@ class CarrierController extends Controller
         $engine = $this->get('konekt_courier.engine');
 
         try {
-            $response = $engine->showHtmlLabel('sprinter', $awbNumber);
+            $response = $engine->showHtmlLabel($this->hardCodedGateway, $awbNumber);
             $html = $response->getHtml();
 
             $response = new Response($html);
@@ -142,6 +152,18 @@ class CarrierController extends Controller
         } catch (Exception $exc) {
             //TOREVIEW
             throw $exc;
+        }
+    }
+
+    private function getGateway()
+    {
+        switch ($this->hardCodedGateway) {
+            case 'fancourier':
+                return new FancourierGateway();
+            case 'sprinter':
+                return new SprinterGateway();
+            default:
+                throw new InvalidCourierException('Unknown courier: ' . $this->hardCodedGateway);
         }
     }
 }
