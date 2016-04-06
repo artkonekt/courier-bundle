@@ -12,10 +12,9 @@
 
 namespace Konekt\CourierBundle\Controller;
 
-use Konekt\Courier\FanCourier\Package;
+use Konekt\Courier\FanCourier\Model\Package;
 use Konekt\Courier\FanCourier\SingleAwbCreator;
 use Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbRequest;
-use Konekt\Courier\FanCourier\Transaction\DeleteAwb\DeleteAwbCommand;
 use Konekt\Courier\FanCourier\Transaction\DeleteAwb\DeleteAwbRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;

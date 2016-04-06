@@ -1,7 +1,0 @@
-fancourier:
-    resource: "fancourier.yml"
-    prefix: /courier/fancourier
-
-sprinter:
-    resource: "sprinter.yml"
-    prefix: /courier/sprinter

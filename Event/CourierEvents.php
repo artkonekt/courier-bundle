@@ -24,7 +24,7 @@ final class CourierEvents
      *
      * @var string
      */
-    const AWB_CREATED = 'courier.awb.created';
+    const AWB_CREATED = 'konekt_courier.awb.created';
 
     /**
      * The courier.awb.delete event is thrown each time an awb is deleted.
@@ -33,5 +33,5 @@ final class CourierEvents
      *
      * @var string
      */
-    const AWB_DELETED = 'courier.awb.deleted';
+    const AWB_DELETED = 'konekt_courier.awb.deleted';
 }

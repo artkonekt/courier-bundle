@@ -1,0 +1,7 @@
+{% import 'KonektCourierBundle::macros.html.twig' as macros %}
+
+{{ macros.modalPlaceholder }}
+
+{% set trackingContent = shipment.tracking ? macros.awbDetailsButton(shipment.tracking) : macros.awbCreateButton(shipment.id) %}
+
+{{ trackingContent }}

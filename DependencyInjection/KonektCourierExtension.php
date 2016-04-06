@@ -14,13 +14,14 @@ namespace Konekt\CourierBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Bundle's main extension.
  */
-class KonektCourierExtension extends Extension
+class KonektCourierExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * Loads a specific configuration.
@@ -43,11 +44,18 @@ class KonektCourierExtension extends Extension
         $container->setParameter('konekt_courier.fancourier.api.user_pass', $config['fancourier']['api']['user_pass']);
         $container->setParameter('konekt_courier.fancourier.api.client_id', $config['fancourier']['api']['client_id']);
 
-        if (isset($config['fancourier']['package_populator_service'])) {
-            $container->setParameter('konekt_courier.fancourier.package.populator.service', $config['fancourier']['package_populator_service']);
-        }
-
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('config.yml');
+        $loader->load('services.yml');
+    }
+
+    public function prepend(ContainerBuilder $container)
+    {
+        $config = [
+            'paths' => [
+                "%kernel.root_dir%/../vendor/konekt/courier/FanCourier/Bridge/Symfony/Resources/views" => "KonektCourierFancourier",
+                "%kernel.root_dir%/../vendor/konekt/courier/Sprinter/Bridge/Symfony/Resources/views" => "KonektCourierSprinter"
+            ]
+        ];
+        $container->prependExtensionConfig('twig', $config);
     }
 }

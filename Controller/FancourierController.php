@@ -12,8 +12,8 @@
 
 namespace Konekt\CourierBundle\Controller;
 
-use Konekt\Courier\FanCourier\Package;
-use Konekt\Courier\FanCourier\PackagePopulatorInterface;
+use Konekt\Courier\FanCourier\Bridge\Symfony\FancourierPackageType;
+use Konekt\Courier\FanCourier\Model\Package;
 use Konekt\Courier\FanCourier\Transaction\AwbToHtml\AwbToHtmlRequest;
 use Konekt\Courier\FanCourier\Transaction\AwbToPdf\AwbToPdfRequest;
 use Konekt\Courier\FanCourier\Transaction\CreateAwb\CreateAwbRequest;
@@ -24,7 +24,6 @@ use Konekt\Courier\FanCourier\Transaction\DeleteAwb\DeleteAwbRequest;
 use Konekt\CourierBundle\Event\AwbCreatedEvent;
 use Konekt\CourierBundle\Event\AwbDeletedEvent;
 use Konekt\CourierBundle\Event\CourierEvents;
-use Konekt\CourierBundle\FormType\FancourierPackageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,10 +44,6 @@ class FancourierController extends Controller
     public function createAwbAction(Request $request, $packageId)
     {
         $package = new Package();
-
-        if ($populator = $this->getPackagePopulator()) {
-            $populator->populate($packageId, $package);
-        }
 
         $form = $this->createForm(new FancourierPackageType(), $package, ['action' => $this->generateUrl('konekt_courier_fancourier_create_awb', ['packageId' => $packageId])]);
 
@@ -174,22 +169,5 @@ class FancourierController extends Controller
             //TOREVIEW
             throw $exc;
         }
-    }
-
-    /**
-     * Returns the package populator service provided by the client application. If no such service was provided, returns
-     * null.
-     *
-     * @return PackagePopulatorInterface
-     */
-    private function getPackagePopulator()
-    {
-        $populator = null;
-
-        if ($this->container->has('konekt_courier.fancourier.package.populator')) {
-            $populator = $this->get('konekt_courier.fancourier.package.populator');
-        }
-
-        return $populator;
     }
 }

@@ -1,0 +1,38 @@
+fancourier:
+    resource: ../../../courier/FanCourier/Bridge/Symfony/Resources/config/routing.yml
+    prefix: /courier/fancourier
+
+sprinter:
+    resource: ../../../courier/Sprinter/Bridge/Symfony/Resources/config/routing.yml
+    prefix: /courier/sprinter
+
+konekt_courier_create_awb:
+    path: /shipments/{shipmentId}/awb/create
+    methods: [GET, POST]
+    defaults:
+        _controller: KonektCourierBundle:Carrier:createAwb
+
+konekt_courier_delete_awb:
+    path: /awb/{awbNumber}/delete
+    methods: [GET, POST]
+    defaults:
+        _controller: KonektCourierBundle:Carrier:deleteAwb
+
+konekt_courier_show_label_pdf:
+    path: /awb/{awbNumber}/label/pdf
+    methods: [GET, POST]
+    defaults:
+        _controller: KonektCourierBundle:Carrier:showLabelPdf
+
+konekt_courier_show_label_html:
+    path: /awb/{awbNumber}/label/html
+    methods: [GET, POST]
+    defaults:
+        _controller: KonektCourierBundle:Carrier:showLabelHtml
+
+konekt_courier_awb_show_details:
+    path: /shipments/awb/{awbNumber}/showDetails
+    methods: [GET, POST]
+    defaults:
+        _controller: KonektCourierBundle:Carrier:showDetails
+

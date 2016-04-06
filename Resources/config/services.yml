@@ -1,0 +1,28 @@
+imports:
+    - { resource: ../../../courier/FanCourier/Bridge/Symfony/Resources/config/services.yml }
+    - { resource: ../../../courier/Sprinter/Bridge/Symfony/Resources/config/services.yml }
+
+parameters:
+    konekt_courier.form_type_resolver.class: Konekt\CourierBundle\Services\CarrierDetailsFormTypeResolver
+    konekt_courier.awb_creator_form_factory.class: Konekt\CourierBundle\Services\AwbCreatorFormFactory
+    konekt_courier.model_factory.class: Konekt\CourierBundle\Services\ModelFactory
+    konekt_courier.engine.class: Konekt\CourierBundle\Services\Engine
+
+services:
+    konekt_courier.form_type_resolver:
+        class: %konekt_courier.form_type_resolver.class%
+
+    konekt_courier.awb_creator_form_factory:
+        class: %konekt_courier.awb_creator_form_factory.class%
+        arguments:
+            - @form.factory
+
+    konekt_courier.model_factory:
+        class: %konekt_courier.model_factory.class%
+        arguments:
+            - @service_container
+
+    konekt_courier.engine:
+        class: %konekt_courier.engine.class%
+        arguments:
+            - @service_container
