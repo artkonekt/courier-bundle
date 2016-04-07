@@ -36,15 +36,25 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('fancourier')
                             ->children()
-                                ->arrayNode('api')
+                                ->arrayNode('configuration')
                                     ->children()
                                         ->scalarNode('username')->isRequired()->cannotBeEmpty()->end()
                                         ->scalarNode('user_pass')->isRequired()->cannotBeEmpty()->end()
                                         ->scalarNode('client_id')->isRequired()->cannotBeEmpty()->end()
                                     ->end()
-                                ->end() //api
+                                ->end() //configuration
                             ->end()
                         ->end() //fancourier
+                        ->arrayNode('sprinter')
+                            ->children()
+                                ->arrayNode('configuration')
+                                    ->children()
+                                        ->scalarNode('partnerCode')->isRequired()->cannotBeEmpty()->end()
+                                        ->scalarNode('partnerBarcodePrefix')->isRequired()->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end() //configuration
+                            ->end()
+                        ->end() //sprinter
                     ->end()
                 ->end() //couriers
             ->end()
