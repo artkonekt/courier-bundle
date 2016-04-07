@@ -1,7 +1,3 @@
-imports:
-    - { resource: ../../../courier/FanCourier/Bridge/Symfony/Resources/config/services.yml }
-    - { resource: ../../../courier/Sprinter/Bridge/Symfony/Resources/config/services.yml }
-
 parameters:
     konekt_courier.form_type_resolver.class: Konekt\CourierBundle\Services\CarrierDetailsFormTypeResolver
     konekt_courier.awb_creator_form_factory.class: Konekt\CourierBundle\Services\AwbCreatorFormFactory

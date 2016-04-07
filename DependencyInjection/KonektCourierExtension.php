@@ -40,12 +40,22 @@ class KonektCourierExtension extends Extension implements PrependExtensionInterf
 
         $config = $config['couriers'];
 
-        $container->setParameter('konekt_courier.fancourier.configuration.username', $config['fancourier']['configuration']['username']);
-        $container->setParameter('konekt_courier.fancourier.configuration.user_pass', $config['fancourier']['configuration']['user_pass']);
-        $container->setParameter('konekt_courier.fancourier.configuration.client_id', $config['fancourier']['configuration']['client_id']);
+        if (isset($config['fancourier'])) {
+            $container->setParameter('konekt_courier.fancourier.configuration.username', $config['fancourier']['configuration']['username']);
+            $container->setParameter('konekt_courier.fancourier.configuration.user_pass', $config['fancourier']['configuration']['user_pass']);
+            $container->setParameter('konekt_courier.fancourier.configuration.client_id', $config['fancourier']['configuration']['client_id']);
 
-        $container->setParameter('konekt_courier.sprinter.configuration.partnerCode', $config['sprinter']['configuration']['partnerCode']);
-        $container->setParameter('konekt_courier.sprinter.configuration.partnerBarcodePrefix', $config['sprinter']['configuration']['partnerBarcodePrefix']);
+            $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../courier/FanCourier/Bridge/Symfony/Resources/config'));
+            $loader->load('services.yml');
+        }
+
+        if (isset($config['sprinter'])) {
+            $container->setParameter('konekt_courier.sprinter.configuration.partnerCode', $config['sprinter']['configuration']['partnerCode']);
+            $container->setParameter('konekt_courier.sprinter.configuration.partnerBarcodePrefix', $config['sprinter']['configuration']['partnerBarcodePrefix']);
+
+            $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../courier/Sprinter/Bridge/Symfony/Resources/config'));
+            $loader->load('services.yml');
+        }
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
