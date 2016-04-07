@@ -31,6 +31,7 @@ class ModelFactory implements ModelFactoryInterface
                 $factory = $this->container->get('konekt_courier.fancourier.package.factory');
                 return $factory->create($data);
                 break;
+            case 'sprinter_ppp':
             case 'sprinter':
                 $factory = $this->container->get('konekt_courier.sprinter.package.factory');
                 return $factory->create($data);

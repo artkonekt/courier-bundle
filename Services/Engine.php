@@ -38,15 +38,19 @@ class Engine
                 $processor = $this->container->get('konekt_courier.fancourier.request.processor');
                 $response = $processor->process($createAwbRequest);
                 break;
+            case 'sprinter_ppp':
+                $createAwbRequest = new RegisterParcelRequest($model, RegisterParcelRequest::TYPE_PPP);
+                $processor = $this->container->get('konekt_courier.sprinter.request.processor');
+                $response = $processor->process($createAwbRequest);
+                break;
             case 'sprinter':
-                $createAwbRequest = new RegisterParcelRequest($model);
+                $createAwbRequest = new RegisterParcelRequest($model, RegisterParcelRequest::TYPE_HOMEDELIVERY);
                 $processor = $this->container->get('konekt_courier.sprinter.request.processor');
                 $response = $processor->process($createAwbRequest);
                 break;
             default:
                 throw new InvalidCourierException("Courier $carrierName not supported");
         }
-
 
 
         return $response;
@@ -63,7 +67,6 @@ class Engine
             default:
                 throw new InvalidCourierException("Courier $carrierName not supported");
         }
-
 
 
         return $response;
@@ -93,6 +96,7 @@ class Engine
                 $response = $processor->process($awbRequest);
                 break;
             case 'sprinter':
+            case 'sprinter_ppp':
                 $processor = $this->container->get('konekt_courier.sprinter.request.processor');
                 $awbRequest = new SprinterAwbToHtmlRequest($awbNumber);
                 $response = $processor->process($awbRequest);

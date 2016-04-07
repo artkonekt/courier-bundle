@@ -1,5 +1,5 @@
 {# TODO: abstract this condition in the model #}
-{% if shipment.carrier in ['fancourier', 'sprinter'] %}
+{% if shipment.carrier in ['fancourier', 'sprinter', 'sprinter_ppp'] %}
     {% import 'KonektCourierBundle::macros.html.twig' as macros %}
 
     {{ macros.modalPlaceholder }}

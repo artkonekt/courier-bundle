@@ -15,6 +15,7 @@ namespace Konekt\CourierBundle\Services;
 
 use Konekt\Courier\Common\Exception\InvalidCourierException;
 use Konekt\Courier\FanCourier\Bridge\Symfony\FancourierPackageType;
+use Konekt\Courier\Sprinter\Bridge\Symfony\Form\PackagePPPType;
 use Konekt\Courier\Sprinter\Bridge\Symfony\Form\PackageType;
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -41,6 +42,10 @@ class AwbCreatorFormFactory implements AwbCreatorFormFactoryInterface
             case 'fancourier':
                 $form = $this->formFactory->create(new FancourierPackageType(), $data, $options);
                 $template = '@KonektCourierFancourier/form.html.twig';
+                break;
+            case 'sprinter_ppp':
+                $form = $this->formFactory->create(new PackagePPPType(), $data, $options);
+                $template = '@KonektCourierSprinter/form.html.twig';
                 break;
             case 'sprinter':
                 $form = $this->formFactory->create(new PackageType(), $data, $options);
