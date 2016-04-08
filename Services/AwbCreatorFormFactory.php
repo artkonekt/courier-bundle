@@ -44,6 +44,11 @@ class AwbCreatorFormFactory implements AwbCreatorFormFactoryInterface
                 $template = '@KonektCourierFancourier/form.html.twig';
                 break;
             case 'sprinter_ppp':
+                if (!isset($options['attr'])) {
+                    $options['attr'] = [];
+                }
+                $options['attr']['shopInfo'] = $data->shopInfo;
+
                 $form = $this->formFactory->create(new PackagePPPType(), $data, $options);
                 $template = '@KonektCourierSprinter/form.html.twig';
                 break;
