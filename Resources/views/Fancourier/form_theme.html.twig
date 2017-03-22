@@ -5,7 +5,7 @@
         <div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
             {{ form_label(form) }}
 
-            <div class="col-lg-8">
+            <div class="col-lg-7">
                 {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
                 {% for error in errors %}
                     <span class="help-block form-error">
@@ -17,6 +17,11 @@
 
                 {% if attr.help is defined %}
                     <span class="help-block">({{ attr.help }})</span>
+                {% endif %}
+            </div>
+            <div class="col-lg-1" style="padding-left: 0">
+                {% if attr.unit is defined %}
+                    <span class="help-block">{{ attr.unit }}</span>
                 {% endif %}
             </div>
         </div>

@@ -22,7 +22,12 @@
                 {{ form_row(form.continut, {'attr': {'help' : 'se modifica doar in cazuri exceptionale'}}) }}
                 {{ form_row(form.tip) }}
                 {{ form_row(form.nr_colet) }}
-                {{ form_row(form.greutate) }}
+                {{ form_row(form.greutate, {'attr': {'unit' : 'kg'}}) }}
+
+                {{ form_row(form.inaltime_pachet, {'attr': {'unit' : 'cm'}}) }}
+                {{ form_row(form.latime_pachet, {'attr': {'unit' : 'cm'}}) }}
+                {{ form_row(form.lungime_pachet, {'attr': {'unit' : 'cm'}}) }}
+
                 {{ form_row(form.plata_expeditii) }}
                 {{ form_row(form.ramburs) }}
                 {{ form_row(form.plata_ramburs_la, {'attr': {'help' : 'daca exista Ramburs numerar'}}) }}

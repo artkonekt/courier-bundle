@@ -51,6 +51,21 @@ class FancourierPackageType extends AbstractType
             'required' => true
         ]);
 
+        $builder->add('inaltime_pachet', 'text', [
+            'label' => 'Inaltime',
+            'required' => false
+        ]);
+
+        $builder->add('latime_pachet', 'text', [
+            'label' => 'Latime',
+            'required' => false
+        ]);
+
+        $builder->add('lungime_pachet', 'text', [
+            'label' => 'Lungime',
+            'required' => false
+        ]);
+
         $builder->add('plata_expeditii', 'choice', [
             'label' => 'Plata expeditiei la',
             'choices' => [
