@@ -181,6 +181,11 @@ class FancourierPackageType extends AbstractType
             'required' => false
         ]);
 
+        $builder->add('optiuni', 'checkbox', [
+            'label'    => 'Deschidere la livrare',
+            'required' => false,
+        ]);
+
         $builder->add('restituire');
 
         $builder->add('save', new SubmitType(), array('label' => 'Creeare AWB'));

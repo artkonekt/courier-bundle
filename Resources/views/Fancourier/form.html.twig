@@ -31,6 +31,9 @@
                 {{ form_row(form.plata_expeditii) }}
                 {{ form_row(form.ramburs) }}
                 {{ form_row(form.plata_ramburs_la, {'attr': {'help' : 'daca exista Ramburs numerar'}}) }}
+
+                {{ form_row(form.optiuni, {'attr': {'checkbox': true}}) }}
+
                 {{ form_row(form.observatii, {'attr': {'help' : '200 caractere'}}) }}
                 {{ form_row(form.nume_destinatar, {'attr': {'help' : '40 caractere'}}) }}
                 {{ form_row(form.persoana_contact, {'attr': {'help' : '30 caractere'}}) }}
