@@ -54,6 +54,10 @@ class FancourierController extends Controller
 
         $form->handleRequest($request);
 
+        if (isset($populator) && $package->optiuni) {
+            $populator->addItems($packageId, $package);
+        }
+
         $response = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
