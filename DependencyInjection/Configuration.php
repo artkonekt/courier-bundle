@@ -47,6 +47,16 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end() //fancourier
+                ->arrayNode('dpd')
+                    ->children()
+                        ->arrayNode('api')
+                            ->children()
+                                ->scalarNode('username')->isRequired()->cannotBeEmpty()->end()
+                                ->scalarNode('password')->isRequired()->cannotBeEmpty()->end()
+                            ->end()
+                        ->end() //api
+                    ->end()
+                ->end() //dpd
             ->end()
         ;
 

@@ -1,15 +1,15 @@
 {% macro awbCreateButton(packageId, text) %}
-    <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#awbModal" href="{{ path('konekt_courier_fancourier_create_awb', {'packageId': packageId}) }}">
-        <i class="glyphicon glyphicon-ok"></i> <span>{{ text|default('Creeare AWB') }}</span>
+    <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#awbModal-fancourier" href="{{ path('konekt_courier_fancourier_create_awb', {'packageId': packageId}) }}">
+        <i class="glyphicon glyphicon-ok"></i> <span>{{ text|default('Creeare AWB Fancourier') }}</span>
     </a>
 {% endmacro %}
 
 {% macro awbDetailsButton(trackingNumber, text) %}
-    <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#awbModal" href="{{ path('konekt_courier_fancourier_awb_show_details', {'awbNumber': trackingNumber}) }}">
+    <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#awbModal-fancourier" href="{{ path('konekt_courier_fancourier_awb_show_details', {'awbNumber': trackingNumber}) }}">
         <span>{{ text|default(trackingNumber) }}</span>
     </a>
 {% endmacro %}
 
 {% macro modalPlaceholder() %}
-    <div class="modal fade" id="awbModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"></div>
+    <div class="modal fade" id="awbModal-fancourier" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"></div>
 {% endmacro %}

@@ -1,0 +1,84 @@
+{% form_theme form 'KonektCourierBundle:Dpd:form_theme.html.twig' %}
+<link rel="stylesheet" href="/bundles/konektcourier/css/main.css"/>
+
+<div id="awb-modal-form-dpd">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Creeare AWB</h4>
+            </div>
+
+            {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'create-awb-form-dpd'}}) }}
+
+            <div class="modal-body">
+
+                {% if result %}
+                    {% if not result.isSuccess() %}
+                        <div class="alert alert-danger alert-dismissable">Eroare: {{ result.getErrorMessage() }}</div>
+                    {% endif %}
+                {% endif %}
+
+                {{ form_row(form.continut, {'attr': {'help' : 'se modifica doar in cazuri exceptionale'}}) }}
+                {#{{ form_row(form.tip) }}#}
+                {#{{ form_row(form.nr_colet) }}#}
+                {#{{ form_row(form.greutate, {'attr': {'unit' : 'kg'}}) }}#}
+
+                {#{{ form_row(form.inaltime_pachet, {'attr': {'unit' : 'cm'}}) }}#}
+                {#{{ form_row(form.latime_pachet, {'attr': {'unit' : 'cm'}}) }}#}
+                {#{{ form_row(form.lungime_pachet, {'attr': {'unit' : 'cm'}}) }}#}
+
+                {#{{ form_row(form.plata_expeditii) }}#}
+                {#{{ form_row(form.ramburs) }}#}
+                {#{{ form_row(form.plata_ramburs_la, {'attr': {'help' : 'daca exista Ramburs numerar'}}) }}#}
+
+                {#{{ form_row(form.optiuni, {'attr': {'checkbox': true}}) }}#}
+
+                {#{{ form_row(form.observatii, {'attr': {'help' : '200 caractere'}}) }}#}
+                {#{{ form_row(form.nume_destinatar, {'attr': {'help' : '40 caractere'}}) }}#}
+                {#{{ form_row(form.persoana_contact, {'attr': {'help' : '30 caractere'}}) }}#}
+                {#{{ form_row(form.telefon, {'attr': {'help' : '25 caractere'}}) }}#}
+                {#{{ form_row(form.judet, {'attr': {'help' : 'complementar cu Cod postal'}}) }}#}
+                {#{{ form_row(form.localitate) }}#}
+                {#{{ form_row(form.strada, {'attr': {'help' : '250 caractere'}}) }}#}
+                {#{{ form_row(form.zip, {'attr': {'help' : '6 caractere, complementar cu Judet'}}) }}#}
+                {#{{ form_row(form.restituire, {'attr': {'help' : '50 caractere'}}) }}#}
+            </div>
+            <div class="modal-footer">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Închide</button>
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+<script>
+    (function ($) {
+        $('body').on('submit', '#create-awb-form-dpd', function (event) {
+            event.preventDefault(); // Prevent the form from submitting via the browser
+            var form = $(this);
+
+            $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: form.serialize()
+            }).done(function (response) {
+                var newContent = $($.parseHTML(response)).filter("#awb-modal-form-dpd").html();
+                $('#awb-modal-form-dpd').html(newContent);
+                $('#awbModal-dpd').animate({scrollTop: 0}, 'fast');
+            }).fail(function (data) {
+                alert('Error:'.data);
+            });
+        });
+
+        $('#awbModal-dpd').on('hidden.bs.modal', function () {
+            if ($('#awb-modal-awb-nr-dpd').length) {
+                location.reload();
+            }
+        })
+    })(jQuery);
+</script>

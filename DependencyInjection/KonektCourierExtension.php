@@ -41,6 +41,9 @@ class KonektCourierExtension extends Extension
         $container->setParameter('konekt_courier.fancourier.api.user_pass', $config['fancourier']['api']['user_pass']);
         $container->setParameter('konekt_courier.fancourier.api.client_id', $config['fancourier']['api']['client_id']);
 
+        $container->setParameter('konekt_courier.dpd.api.username', $config['dpd']['api']['username']);
+        $container->setParameter('konekt_courier.dpd.api.password', $config['dpd']['api']['password']);
+
         if (isset($config['fancourier']['package_populator_service'])) {
             $container->setParameter('konekt_courier.fancourier.package.populator.service', $config['fancourier']['package_populator_service']);
         }

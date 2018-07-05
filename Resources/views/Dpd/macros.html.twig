@@ -1,0 +1,15 @@
+{% macro awbCreateButton(packageId, text) %}
+    <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#awbModal-dpd" href="{{ path('konekt_courier_dpd_create_awb', {'packageId': packageId}) }}">
+        <i class="glyphicon glyphicon-ok"></i> <span>{{ text|default('Creeare AWB DPD') }}</span>
+    </a>
+{% endmacro %}
+
+{% macro awbDetailsButton(trackingNumber, text) %}
+    <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#awbModal-dpd" href="{{ path('konekt_courier_dpd_awb_show_details', {'awbNumber': trackingNumber}) }}">
+        <span>{{ text|default(trackingNumber) }}</span>
+    </a>
+{% endmacro %}
+
+{% macro modalPlaceholder() %}
+    <div class="modal fade" id="awbModal-dpd" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"></div>
+{% endmacro %}

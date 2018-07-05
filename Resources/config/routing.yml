@@ -1,11 +1,11 @@
 konekt_courier_fancourier_create_awb:
-    path: /courier/awb/create/{packageId}
+    path: /courier/awb/create/fancourier/{packageId}
     methods: [GET, POST]
     defaults:
         _controller: KonektCourierBundle:Fancourier:createAwb
 
 konekt_courier_fancourier_awb_show_details:
-    path: /courier/awb/details/{awbNumber}
+    path: /courier/awb/details/fancourier/{awbNumber}
     defaults:
         _controller: KonektCourierBundle:Fancourier:awbShowDetails
 
@@ -33,3 +33,17 @@ konekt_courier_fancourier_test_awb_deletion:
     path: /courier/testAwbDeletion/{awbNumber}
     defaults:
         _controller: KonektCourierBundle:FancourierTest:testDeletion
+
+# DPD
+
+konekt_courier_dpd_create_awb:
+    path: /courier/awb/create/dpd/{packageId}
+    methods: [GET, POST]
+    defaults:
+        _controller: KonektCourierBundle:Dpd:createAwb
+
+konekt_courier_dpd_awb_show_details:
+    path: /courier/awb/details/dpd/{awbNumber}
+    defaults:
+        _controller: KonektCourierBundle:Dpd:awbShowDetails
+
