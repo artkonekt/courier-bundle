@@ -13,6 +13,7 @@
 
 namespace Konekt\CourierBundle\Controller;
 
+use Konekt\Courier\Dpd\PackagePopulatorInterface;
 use Konekt\Courier\Dpd\Transaction\CancelShipment\CancelShipmentRequest;
 use Konekt\Courier\Dpd\Transaction\CreateShipment\CreateShipmentRequest;
 use Konekt\Courier\Dpd\Transaction\PrintAwb\PrintRequest;
@@ -40,7 +41,9 @@ class DpdController extends Controller
     {
         $package = new Package();
 
-        // TODO: populate package with real data
+        if ($populator = $this->getPackagePopulator()) {
+            $populator->populate($packageId, $package);
+        }
 
         $form = $this->createForm(new DpdPackageType(), $package, ['action' => $this->generateUrl('konekt_courier_dpd_create_awb', ['packageId' => $packageId])]);
 
@@ -69,20 +72,6 @@ class DpdController extends Controller
             'form' => $form->createView(),
             'result' => $response
         ));
-
-
-//
-//        if ($populator = $this->getPackagePopulator()) {
-//            $populator->populate($packageId, $package);
-//        }
-//
-//        $form = $this->createForm(new FancourierPackageType(), $package, ['action' => $this->generateUrl('konekt_courier_fancourier_create_awb', ['packageId' => $packageId])]);
-//
-//        $form->handleRequest($request);
-//
-//        if (isset($populator) && $package->optiuni) {
-//            $populator->addItems($packageId, $package);
-//        }
     }
 
     /**
@@ -167,4 +156,20 @@ class DpdController extends Controller
         }
     }
 
+    /**
+     * Returns the package populator service provided by the client application. If no such service was provided, returns
+     * null.
+     *
+     * @return PackagePopulatorInterface
+     */
+    private function getPackagePopulator()
+    {
+        $populator = null;
+
+        if ($this->container->has('konekt_courier.dpd.package.populator')) {
+            $populator = $this->get('konekt_courier.dpd.package.populator');
+        }
+
+        return $populator;
+    }
 }

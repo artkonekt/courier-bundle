@@ -42,7 +42,7 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end() //api
                         ->scalarNode('package_populator_service')
-                            ->info("The name of the service which populates the package object (and form) based on the package ID.\nIt should implement \\Konekt\\Courier\\FanCourier\\Package\\PackagePopulatorInterface")
+                            ->info("The name of the service which populates the package object (and form) based on the package ID.\nIt should implement \\Konekt\\Courier\\FanCourier\\PackagePopulatorInterface")
                             //->defaultValue('konekt_courier.fancourier.package.populator.default')
                         ->end()
                     ->end()
@@ -55,6 +55,9 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('password')->isRequired()->cannotBeEmpty()->end()
                             ->end()
                         ->end() //api
+                        ->scalarNode('package_populator_service')
+                            ->info("The name of the service which populates the package object (and form) based on the package ID.\nIt should implement \\Konekt\\Courier\\Dpd\\PackagePopulatorInterface")
+                        ->end()
                     ->end()
                 ->end() //dpd
             ->end()

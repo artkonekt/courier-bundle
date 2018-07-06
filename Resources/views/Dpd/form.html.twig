@@ -19,30 +19,30 @@
                     {% endif %}
                 {% endif %}
 
-                {{ form_row(form.continut, {'attr': {'help' : 'se modifica doar in cazuri exceptionale'}}) }}
-                {#{{ form_row(form.tip) }}#}
-                {#{{ form_row(form.nr_colet) }}#}
-                {#{{ form_row(form.greutate, {'attr': {'unit' : 'kg'}}) }}#}
+                {{ form_row(form.recipient_phone1_number) }}
+                {{ form_row(form.recipient_clientName) }}
+                {{ form_row(form.recipient_contactName) }}
+                {{ form_row(form.recipient_email) }}
 
-                {#{{ form_row(form.inaltime_pachet, {'attr': {'unit' : 'cm'}}) }}#}
-                {#{{ form_row(form.latime_pachet, {'attr': {'unit' : 'cm'}}) }}#}
-                {#{{ form_row(form.lungime_pachet, {'attr': {'unit' : 'cm'}}) }}#}
+                {{ form_row(form.recipient_address_siteName) }}
+                {{ form_row(form.recipient_address_streetName) }}
 
-                {#{{ form_row(form.plata_expeditii) }}#}
-                {#{{ form_row(form.ramburs) }}#}
-                {#{{ form_row(form.plata_ramburs_la, {'attr': {'help' : 'daca exista Ramburs numerar'}}) }}#}
+                {{ form_row(form.service_pickupDate) }}
+                {{ form_row(form.service_serviceId) }}
+                {{ form_row(form.service_additionalServices_declaredValue_amount) }}
 
-                {#{{ form_row(form.optiuni, {'attr': {'checkbox': true}}) }}#}
+                <hr/>
 
-                {#{{ form_row(form.observatii, {'attr': {'help' : '200 caractere'}}) }}#}
-                {#{{ form_row(form.nume_destinatar, {'attr': {'help' : '40 caractere'}}) }}#}
-                {#{{ form_row(form.persoana_contact, {'attr': {'help' : '30 caractere'}}) }}#}
-                {#{{ form_row(form.telefon, {'attr': {'help' : '25 caractere'}}) }}#}
-                {#{{ form_row(form.judet, {'attr': {'help' : 'complementar cu Cod postal'}}) }}#}
-                {#{{ form_row(form.localitate) }}#}
-                {#{{ form_row(form.strada, {'attr': {'help' : '250 caractere'}}) }}#}
-                {#{{ form_row(form.zip, {'attr': {'help' : '6 caractere, complementar cu Judet'}}) }}#}
-                {#{{ form_row(form.restituire, {'attr': {'help' : '50 caractere'}}) }}#}
+                {{ form_row(form.content_parcelsCount) }}
+                {{ form_row(form.content_totalWeight, {'attr': {'unit' : 'kg'}}) }}
+                {{ form_row(form.content_contents) }}
+                {{ form_row(form.content_package) }}
+
+                <hr/>
+
+                {{ form_row(form.shipmentNote) }}
+                {{ form_row(form.ref1) }}
+
             </div>
             <div class="modal-footer">
                 <div class="input-group-btn">

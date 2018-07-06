@@ -46,5 +46,24 @@ class PackagePopulatorPass implements CompilerPassInterface
 
             $container->setAlias('konekt_courier.fancourier.package.populator', $populatorServiceName);
         }
+
+        // Same as above, but for DPD. At this point it does not make sense to extract/abstract it. If another courier
+        // must be supported or for some reason this becomes problematic during maintenance, MUST be dealt with and
+        // refactored with the right abstraction.
+        if ($container->hasParameter('konekt_courier.dpd.package.populator.service')) {
+            $populatorServiceName = $container->getParameter('konekt_courier.dpd.package.populator.service');
+
+            if (!$container->has($populatorServiceName)) {
+                throw new Exception("Package populator service '$populatorServiceName' does not exist");
+            }
+
+            $populatorServiceDefinition = $container->getDefinition($populatorServiceName);
+            $class = new ReflectionClass($populatorServiceDefinition->getClass());
+            if (!$class->implementsInterface('Konekt\Courier\Dpd\PackagePopulatorInterface')) {
+                throw new Exception("Package populator service '$populatorServiceName' should implement Konekt\\Courier\\Dpd\\PackagePopulatorInterface");
+            }
+
+            $container->setAlias('konekt_courier.dpd.package.populator', $populatorServiceName);
+        }
     }
 }
