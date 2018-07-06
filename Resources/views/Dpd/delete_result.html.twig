@@ -1,0 +1,22 @@
+<div id="awb-modal-form-dpd">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Stergere AWB {{ awbNumber }}</h4>
+            </div>
+
+            <div class="modal-body">
+                {% if error %}
+                    <p class="alert alert-danger">AWB-ul {{ awbNumber }} nu a putut fi sters. Mesajul de eroare: {{ error }}</p>
+                {% else %}
+                    <p class="alert alert-success">AWB-ul <span id="awb-modal-awb-nr-dpd">{{ awbNumber }}</span> a fost sters</p>
+                {% endif %}
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Închide</button>
+            </div>
+        </div>
+    </div>
+</div>

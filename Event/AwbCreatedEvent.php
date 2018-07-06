@@ -30,15 +30,21 @@ class AwbCreatedEvent extends Event
     private $awbNumber;
 
     /**
+     * @var string
+     */
+    private $courier;
+
+    /**
      * AwbCreatedEvent constructor.
      *
      * @param $packageId
      * @param $awbNumber
      */
-    public function __construct($packageId, $awbNumber)
+    public function __construct($packageId, $awbNumber, $courier = 'fancourier')
     {
         $this->packageId = $packageId;
         $this->awbNumber = $awbNumber;
+        $this->courier = $courier;
     }
 
     /**
@@ -59,5 +65,15 @@ class AwbCreatedEvent extends Event
     public function getAwbNumber()
     {
         return $this->awbNumber;
+    }
+
+    /**
+     * Returns the courier which handles the package.
+     *
+     * @return string
+     */
+    public function getCourier()
+    {
+        return $this->courier;
     }
 }

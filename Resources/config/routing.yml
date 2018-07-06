@@ -47,3 +47,13 @@ konekt_courier_dpd_awb_show_details:
     defaults:
         _controller: KonektCourierBundle:Dpd:awbShowDetails
 
+konekt_courier_dpd_awb_show_pdf:
+    path: /courier/awb/dpd/showPdf/{awbNumber}
+    defaults:
+        _controller: KonektCourierBundle:Dpd:awbShowPdf
+
+konekt_courier_dpd_awb_delete:
+    path: /courier/awb/dpd/delete/{awbNumber}
+    defaults:
+        _controller: KonektCourierBundle:Dpd:awbDelete
+

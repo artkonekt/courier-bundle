@@ -1,0 +1,59 @@
+<div id="awb-modal-form-dpd">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Detalii AWB {{ awbNumber }}</h4>
+            </div>
+
+            <div class="modal-body">
+                <p id="awb-modal-awb-nr">Nr. AWB: {{ awbNumber }} </p>
+
+                <ul>
+                    <li>
+                        <a href="{{ path('konekt_courier_dpd_awb_show_pdf', {'awbNumber': awbNumber}) }}" target="_blank">Afișare AWB în PDF</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('konekt_courier_dpd_awb_delete', {'awbNumber': awbNumber}) }}" id="konekt-courier-awb-delete">Ștergere AWB</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Închide</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function ($) {
+        $('body').on('click', '#konekt-courier-awb-delete', function (event) {
+
+            if (!confirm('AWB-ul va fi șters din sistemul DPD. Ești sigur?')) {
+                return false;
+            }
+
+            event.preventDefault(); // Prevent the form from submitting via the browser
+            var link = $(this);
+
+            $.ajax({
+                url: link.attr('href'),
+            }).done(function (response) {
+                var newContent = $($.parseHTML(response)).filter("#awb-modal-form-dpd").html();
+                $('#awb-modal-form-dpd').html(newContent);
+                $('#awbModal-dpd').animate({scrollTop: 0}, 'fast');
+            }).fail(function (data) {
+                alert('Error:' + data);
+            });
+        });
+
+        $('#awbModal-dpd').on('hidden.bs.modal', function () {
+            if ($('#awb-modal-awb-nr-dpd').length) {
+                location.reload();
+            }
+        })
+    })
+    (jQuery);
+</script>
+
