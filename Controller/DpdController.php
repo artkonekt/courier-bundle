@@ -60,7 +60,7 @@ class DpdController extends Controller
             if ($response->isSuccess()) {
                 $awbNumber = $response->getAwbNumber();
 
-                $event = new AwbCreatedEvent($packageId, $awbNumber, 'dpd');
+                $event = new AwbCreatedEvent($packageId, $awbNumber, 'dpd', json_encode($response->getBody()));
                 $eventDispatcher = $this->container->get('event_dispatcher');
                 $eventDispatcher->dispatch(CourierEvents::AWB_CREATED, $event);
 
@@ -127,17 +127,17 @@ class DpdController extends Controller
      */
     public function awbShowPdfAction($awbNumber)
     {
+        $parcelIds = $this->getParcelIds($awbNumber);
+
         try {
 
             $processor = $this->get('konekt_courier.dpd.request.processor');
-            $awbRequest = new PrintRequest($awbNumber);
+            $awbRequest = new PrintRequest($parcelIds);
             $response = $processor->process($awbRequest);
 
-            $error = false;
             if ($response->isSuccess()) {
                 $pdf = $response->getPdf();
 
-                //Do not print alongside HTML result (will fail to load PDF)
                 $response = new Response($pdf);
                 $response->headers->set('Content-Type', 'application/pdf');
 
@@ -154,6 +154,30 @@ class DpdController extends Controller
             //TOREVIEW
             throw $exc;
         }
+    }
+
+    /**
+     * Returns the parcel IDS belonging to a given shipment number.
+     *
+     * @param $awbNumber
+     *
+     * @return array
+     * @throws Exception
+     */
+    private function getParcelIds($awbNumber)
+    {
+        $shipmentRepository = $this->get('sylius.repository.shipment');
+        $shipment = $shipmentRepository->findOneBy(['tracking' => $awbNumber, 'courier' => 'dpd']);
+
+        if (!$shipment) {
+            throw new Exception(sprintf('Shipment with DPD tracking number %s not found', $awbNumber));
+        }
+
+        if ($courierData = json_decode($shipment->getCourierData())) {
+            $parcelIds = array_map(function ($parcel) { return $parcel->id; }, $courierData->parcels);
+        }
+
+        return $parcelIds;
     }
 
     /**
