@@ -1,4 +1,4 @@
-{% form_theme form 'KonektCourierBundle:Dpd:form_theme.html.twig' %}
+{% form_theme form 'KonektCourierBundle:form_theme.html.twig' %}
 <link rel="stylesheet" href="/bundles/konektcourier/css/main.css"/>
 
 <div id="awb-modal-form-dpd">
@@ -24,7 +24,12 @@
                 {{ form_row(form.recipient_contactName) }}
                 {{ form_row(form.recipient_email) }}
 
+                <hr>
+
+                {{ form_row(form.region) }}
                 {{ form_row(form.recipient_address_siteName) }}
+                {{ form_row(form.recipient_address_siteId, {'attr': {'help' : 'se rezolva automat din judet si oras'}}) }}
+
                 {{ form_row(form.recipient_address_streetName) }}
 
                 {{ form_row(form.service_pickupDate) }}
@@ -58,6 +63,35 @@
 
 <script>
     (function ($) {
+        $(document).ready(function () {
+            loadSiteId();
+        });
+
+        $('body').on('change', '#dpd_package_recipient_address_siteName, #dpd_package_region', function (event) {
+            loadSiteId();
+        });
+
+        function loadSiteId()
+        {
+            var siteName = $('#dpd_package_recipient_address_siteName').val();
+            var region = $('#dpd_package_region').val();
+
+            $.ajax({
+                url: "{{ path('konekt_courier_dpd_find_site') }}?name=" + siteName + "&region=" + region,
+            }).done(function (response) {
+                var siteId = response[0].id;
+                if (response.length) {
+                    $('#dpd_package_recipient_address_siteId').val(siteId);
+                    var serviceId = ('642279132' == siteId) ? 2113 : 2002;
+                    $('#dpd_package_service_serviceId').val(serviceId);
+                } else {
+                    $('#dpd_package_recipient_address_siteId').val('');
+                }
+            }).fail(function (data) {
+                alert('Error:'.data);
+            });
+        }
+
         $('body').on('submit', '#create-awb-form-dpd', function (event) {
 
             event.preventDefault(); // Prevent the form from submitting via the browser

@@ -16,6 +16,7 @@ namespace Konekt\CourierBundle\Controller;
 use Konekt\Courier\Dpd\PackagePopulatorInterface;
 use Konekt\Courier\Dpd\Transaction\CancelShipment\CancelShipmentRequest;
 use Konekt\Courier\Dpd\Transaction\CreateShipment\CreateShipmentRequest;
+use Konekt\Courier\Dpd\Transaction\FindSite\FindSiteRequest;
 use Konekt\Courier\Dpd\Transaction\PrintAwb\PrintRequest;
 use Konekt\CourierBundle\Event\AwbCreatedEvent;
 use Konekt\CourierBundle\Event\AwbDeletedEvent;
@@ -140,6 +141,36 @@ class DpdController extends Controller
 
                 $response = new Response($pdf);
                 $response->headers->set('Content-Type', 'application/pdf');
+
+                return $response;
+            } else {
+                $error = $response->getErrorMessage();
+                $response = new Response($error);
+
+                return $response;
+            }
+
+
+        } catch (Exception $exc) {
+            //TOREVIEW
+            throw $exc;
+        }
+    }
+
+    public function findSiteAction(Request $request)
+    {
+        $name = $request->query->get('name');
+        $region = $request->query->get('region');
+
+        try {
+
+            $processor = $this->get('konekt_courier.dpd.request.processor');
+            $request = new FindSiteRequest($name, $region);
+            $response = $processor->process($request);
+
+            if ($response->isSuccess()) {
+                $response = new Response(json_encode($response->getSites()));
+                $response->headers->set('Content-Type', 'application/json');
 
                 return $response;
             } else {

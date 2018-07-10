@@ -57,3 +57,8 @@ konekt_courier_dpd_awb_delete:
     defaults:
         _controller: KonektCourierBundle:Dpd:awbDelete
 
+konekt_courier_dpd_find_site:
+    path: /courier/dpd/findSite
+    defaults:
+        _controller: KonektCourierBundle:Dpd:findSite
+
