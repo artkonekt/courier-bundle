@@ -6,7 +6,7 @@
 
 {% macro awbDetailsButton(trackingNumber, text) %}
     <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#awbModal-fancourier" href="{{ path('konekt_courier_fancourier_awb_show_details', {'awbNumber': trackingNumber}) }}">
-        <span>{{ text|default(trackingNumber) }} - Fancourier</span>
+        <span>{{ text|default(trackingNumber) }} - Fan</span>
     </a>
 {% endmacro %}
 

@@ -69,13 +69,13 @@
             }).done(function (response) {
                 var newContent = $($.parseHTML(response)).filter("#awb-modal-form").html();
                 $('#awb-modal-form').html(newContent);
-                $('#awbModal').animate({scrollTop: 0}, 'fast');
+                $('#awbModal-fancourier').animate({scrollTop: 0}, 'fast');
             }).fail(function (data) {
                 alert('Error:'.data);
             });
         });
 
-        $('#awbModal').on('hidden.bs.modal', function () {
+        $('#awbModal-fancourier').on('hidden.bs.modal', function () {
             if ($('#awb-modal-awb-nr').length) {
                 location.reload();
             }
