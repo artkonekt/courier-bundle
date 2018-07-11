@@ -19,6 +19,9 @@
                     {% endif %}
                 {% endif %}
 
+                {{ form_row(form.sender_clientId) }}
+                {{ form_row(form.sender_phone1_number) }}
+
                 {{ form_row(form.recipient_phone1_number) }}
                 {{ form_row(form.recipient_clientName) }}
                 {{ form_row(form.recipient_contactName) }}
@@ -42,6 +45,10 @@
                 {{ form_row(form.content_totalWeight, {'attr': {'unit' : 'kg'}}) }}
                 {{ form_row(form.content_contents) }}
                 {{ form_row(form.content_package) }}
+
+                <hr/>
+
+                {{ form_row(form.service_additionalServices_cod_amount) }}
 
                 <hr/>
 

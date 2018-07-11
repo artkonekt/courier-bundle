@@ -24,6 +24,9 @@ class DpdPackageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->add('sender_clientId', 'hidden');
+        $builder->add('sender_phone1_number', 'hidden');
+
         $builder->add('recipient_phone1_number', 'text', [
             'label' => 'Telefon',
         ]);
@@ -102,6 +105,10 @@ class DpdPackageType extends AbstractType
         $builder->add('service_pickupDate', 'hidden');
         $builder->add('service_serviceId', 'hidden');
         $builder->add('service_additionalServices_declaredValue_amount', 'hidden');
+        $builder->add('service_additionalServices_cod_amount', 'text', [
+            'label' => 'Ramburs',
+            'required' => false
+        ]);
 
 
         $builder->add('content_parcelsCount', 'text', [
